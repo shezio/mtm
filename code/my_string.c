@@ -63,27 +63,26 @@ int main(int argc, char *argv[]) {
             default:/*non of the above function:*/
                 printf("\nYour selection didn\'t feet to any of our function.\n");
                 break;
-	}
-
-        if (scanf("%s", str1) != 1) {
-            printf("Error reading input\n");
-            return 1;
-        }
-        if (scanf("%s", str2) != 1) {
-            printf("Error reading input\n");
-            return 1;
-        }
+	    }
     } else {
-        /*input redirection, use fgets*/ 
-        if (fgets(str1, MAX_SIZE, stdin) == NULL) {
-            printf("Error reading input\n");
-            return 1;
-        }
-        if (fgets(str2, MAX_SIZE, stdin) == NULL) {
-            printf("Error reading input\n");
-            return 1;
-        }
-    
+        /* Declare a buffer variable to read file content*/
+        char line[MAX_SIZE];
+        while (fgets(line, sizeof(line), fp) != NULL) {
+            /* If we have 2 strings we will call strcmp*/
+            
+            if (sscanf(line, "%s %s %d", str1, str2, &num_of_chars_to_compare) == 3) {
+                printf("Calling strncmp(%s, %s, %d)\n", str1, str2, num_of_chars_to_compare);
+                /*Call strncmp function with str1, str2, and num*/ 
+            }
+            else if (sscanf(line, "%s %s", str1, str2) == 2) {
+                printf("Calling strcmp(%s, %s)\n", str1, str2);
+                /* Call strcmp function with str1 and str2*/
+            }    
+            else if (sscanf(line, "%s %c", str1, &char_to_search_for_index) == 2) {
+                printf("Calling strchr(%s, '%c')\n", str1, char_to_search_for_index);
+                /* Call strchr function with str and ch*/
+            }
+        }    
     }
 
     /* Close file if necessary*/
