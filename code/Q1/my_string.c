@@ -71,16 +71,16 @@ int main(int argc, char *argv[]) {
             /* If we have 2 strings we will call strcmp*/
             
             if (sscanf(line, "%s %s %d", str1, str2, &num_of_chars_to_compare) == 3) {
-                printf("Calling strncmp(%s, %s, %d)\n", str1, str2, num_of_chars_to_compare);
-                /*Call strncmp function with str1, str2, and num*/ 
+                printf("Calling my_strncmp(%s, %s, %d)\n", str1, str2, num_of_chars_to_compare);
+                printf("\nThe result is: %d\n",my_strncmp(str1, str2, num_of_chars_to_compare));
             }
             else if (sscanf(line, "%s %s", str1, str2) == 2) {
-                printf("Calling strcmp(%s, %s)\n", str1, str2);
-                /* Call strcmp function with str1 and str2*/
+                printf("Calling my_strcmp(%s, %s)\n", str1, str2);
+                printf("\nThe result is: %d\n",my_strcmp(str1, str2));
             }    
             else if (sscanf(line, "%s %c", str1, &char_to_search_for_index) == 2) {
-                printf("Calling strchr(%s, '%c')\n", str1, char_to_search_for_index);
-                /* Call strchr function with str and ch*/
+                printf("Calling my_strchr(%s, '%c')\n", str1, char_to_search_for_index);
+                printf("\nThe result is: %d\n",my_strchr(str1, char_to_search_for_index));
             }
         }    
     }
