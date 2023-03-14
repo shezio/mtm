@@ -1,0 +1,46 @@
+Enter a positive integer: 
+This is the decimal input: 90
+Binary output: 1011010
+Count of even-indexed 1 bits: 2
+
+
+Enter a positive integer: 
+This is the decimal input: 350
+Binary output: 101011110
+Count of even-indexed 1 bits: 4
+
+
+Enter a positive integer: 
+This is the decimal input: 43690
+Binary output: 1010101010101010
+Count of even-indexed 1 bits: 0
+
+
+Enter a positive integer: 
+This is the decimal input: 0
+Binary output: 0
+Count of even-indexed 1 bits: 0
+
+
+End of File inputs
+
+Enter a positive integer: 
+This is the decimal input: 123
+Binary output: 1111011
+Count of even-indexed 1 bits: 3
+
+
+Enter a positive integer: 
+This is the decimal input: 150
+Binary output: 10010110
+Count of even-indexed 1 bits: 2
+
+
+Enter a positive integer: 
+This is the decimal input: 85
+Binary output: 1010101
+Count of even-indexed 1 bits: 4
+
+End of Keyboard inputs 
+
+(DISCLAIMER: cannot show the number in the 1st print of every keyboard run since the output doesnt go to stdout)

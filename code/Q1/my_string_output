@@ -1,0 +1,129 @@
+Hi! Insert 2 strings to compare using my_strcmp function
+ Insert 2 strings and a number to compare first N chars using my_strncmp function
+ Insert a string and a char to find its location in the string using my_strchr function
+
+ Calling my_strcmp
+ Please insert 2 strings, each with max size of 80 characters: 
+Input the first string: This is str1: hello
+Input the second string: This is str2: hello
+The result is: 0
+
+ Calling my_strncmp
+Please insert 2 strings, each with max size of 
+ max 80 characters and a number not greater than max 80 characters:
+Input the first string: This is str1: hello
+Input the second string: This is str2: world
+Input the number of characters to compare: This is the number of chars to compare: 5
+The result is: -1
+
+ Calling my_strchr
+Type string to the str: This is str1: hello
+Type char to get index of: This is the char to search: h
+The result is: 0
+
+End of file all_funcs
+
+
+Hi! Insert 2 strings to compare using my_strcmp function
+ Insert 2 strings and a number to compare first N chars using my_strncmp function
+ Insert a string and a char to find its location in the string using my_strchr function
+
+ Calling my_strcmp
+ Please insert 2 strings, each with max size of 80 characters: 
+Input the first string: This is str1: hello
+Input the second string: This is str2: hell
+The result is: 111
+
+ Calling my_strncmp
+Please insert 2 strings, each with max size of 
+ max 80 characters and a number not greater than max 80 characters:
+Input the first string: This is str1: hello
+Input the second string: This is str2: hella
+Input the number of characters to compare: This is the number of chars to compare: 4
+The result is: 0
+
+ Calling my_strchr
+Type string to the str: This is str1: hello
+Type char to get index of: This is the char to search: o
+The result is: 4
+
+End of file all_func2
+
+
+Hi! Insert 2 strings to compare using my_strcmp function
+ Insert 2 strings and a number to compare first N chars using my_strncmp function
+ Insert a string and a char to find its location in the string using my_strchr function
+
+ Calling my_strcmp
+ Please insert 2 strings, each with max size of 80 characters: 
+Input the first string: This is str1: hello
+Input the second string: This is str2: olleh
+The result is: -7
+
+ Calling my_strncmp
+Please insert 2 strings, each with max size of 
+ max 80 characters and a number not greater than max 80 characters:
+Input the first string: This is str1: \0
+Input the second string: This is str2: \0
+Input the number of characters to compare: This is the number of chars to compare: 2
+The result is: 0
+
+ Calling my_strchr
+Type string to the str: This is str1: hello
+Type char to get index of: This is the char to search: &
+The result is: -1
+
+End of file all_func3
+
+
+Hi! Insert 2 strings to compare using my_strcmp function
+ Insert 2 strings and a number to compare first N chars using my_strncmp function
+ Insert a string and a char to find its location in the string using my_strchr function
+
+ Calling my_strcmp
+ Please insert 2 strings, each with max size of 80 characters: 
+Input the first string: This is str1: qwewer
+Input the second string: This is str2: qwewer
+The result is: 0
+
+ Calling my_strncmp
+Please insert 2 strings, each with max size of 
+ max 80 characters and a number not greater than max 80 characters:
+Input the first string: This is str1: qweasddf
+Input the second string: This is str2: qweasddf
+Input the number of characters to compare: This is the number of chars to compare: 10
+The result is: 0
+
+ Calling my_strchr
+Type string to the str: This is str1: qwertyuioasdfghjklzxcvbnm,!@#$%^&*()
+Type char to get index of: This is the char to search: @
+The result is: 27
+
+
+End of keyboard_input1
+
+Hi! Insert 2 strings to compare using my_strcmp function
+ Insert 2 strings and a number to compare first N chars using my_strncmp function
+ Insert a string and a char to find its location in the string using my_strchr function
+
+ Calling my_strcmp
+ Please insert 2 strings, each with max size of 80 characters: 
+Input the first string: This is str1: ""
+Input the second string: This is str2: ""
+The result is: 0
+
+ Calling my_strncmp
+Please insert 2 strings, each with max size of 
+ max 80 characters and a number not greater than max 80 characters:
+Input the first string: This is str1: ASDfgh
+Input the second string: This is str2: asdfgh
+Input the number of characters to compare: This is the number of chars to compare: 6
+The result is: -1
+
+ Calling my_strchr
+Type string to the str: This is str1: string
+Type char to get index of: This is the char to search: i
+The result is: 3
+
+
+End of keyboard_input2
