@@ -17,7 +17,7 @@
  *    - Char
  *
  * Returns:
- *    - An integer indicating the exit status of the program.
+ *    - An integer indicating the result of each function status of the program.
  */
 
 #include <stdio.h>
