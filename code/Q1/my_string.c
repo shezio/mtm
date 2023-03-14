@@ -57,44 +57,47 @@ int my_strncmp(char[], char[],int);
  *          is not found in `s`.
  */
 int my_strchr(char[], char);
-int main(int argc, char *argv[]) {
+int main() {
 	char str1[MAX_SIZE];
 	char str2[MAX_SIZE];
     int num_of_chars_to_compare;
     char char_to_search_for_index;
-    
-    if (argc == 2) { /* if the file is specified in the command line argument */
-        freopen(argv[1], "r", stdin); /*  redirect standard input to the file */
-    }
-    /* If the first char is a newline - then we are using the keyboard */
+
     printf("Hi! Insert 2 strings to compare using my_strcmp function");
     printf("\n Insert 2 strings and a number to compare first N chars using my_strncmp function");
     printf("\n Insert a string and a char to find its location in the string using my_strchr function");
 
     /* Calling my_strcmp */
-    printf("\n Calling my_strcmp");
+    printf("\n\n Calling my_strcmp");
     printf("\n Please insert 2 strings, each with max size of %d characters: ", MAX_SIZE-1);
     printf("\nInput the first string: ");
     scanf("%s", str1);
+    printf("This is str1: %s",str1);
     printf("\nInput the second string: ");
     scanf("%s", str2);
+    printf("This is str2: %s",str2);
     printf("\nThe result is: %d\n",my_strcmp(str1, str2));
     /* Calling my_strncmp */
     printf("\n Calling my_strncmp");
     printf("\nPlease insert 2 strings, each with max size of \n max %d characters and a number not greater than max %d characters:", MAX_SIZE-1, MAX_SIZE-1);
     printf("\nInput the first string: ");
     scanf("%s", str1);
+    printf("This is str1: %s",str1);
     printf("\nInput the second string: ");
     scanf("%s", str2);
+    printf("This is str2: %s",str2);
     printf("\nInput the number of characters to compare: ");
     scanf("%d",&num_of_chars_to_compare);
+    printf("This is the number of chars to compare: %d",num_of_chars_to_compare);
     printf("\nThe result is: %d\n",my_strncmp(str1, str2,num_of_chars_to_compare));
     /* Calling my_strchr */
     printf("\n Calling my_strchr");
     printf("\nType string to the str: ");
     scanf("%s", str1);
-    printf("Type char to get index of: ");
+    printf("This is str1: %s",str1);
+    printf("\nType char to get index of: ");
     scanf(" %c", &char_to_search_for_index);
+    printf("This is the char to search: %c",char_to_search_for_index);
     printf("\nThe result is: %d\n",my_strchr(str1, char_to_search_for_index));
     return 0;
 }
