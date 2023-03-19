@@ -18,20 +18,17 @@
  * @param c: the amount to increase the size of the array by
  * @return the new size of the array
  */
-#define ENLARGE_SIZE(x, c) ((x) + (c))
-#define INITIAL_SIZE 10
-
+#define INITIAL_SIZE 2
+#define ENLARGE_SIZE(s, n) (((n) > (s)) ? (n) : ((s) * INITIAL_SIZE))
 
 /**
- * This function dynamically grows an integer set while taking input from the user and
- * ensures that each number is unique.
+ * This function reads integers from standard input and stores them as a set of integers in a dynamic array.
+ * The set will not contain any duplicates.
  *
- * @param set A pointer to a pointer to an integer set
- * @param set_size A pointer to an integer representing the size of the set
- *
- * @return void
- */
-void get_set(int **set, int *set_size);
+ * @param set_ptr: a pointer to a pointer to the set of integers
+ * @param set_size: a pointer to the number of elements in the set
+ */ 
+void get_set(int **set_ptr, int *set_size);
 
 /**
  * This function prints out a given integer set, ensuring that each number is printed only once.
@@ -44,7 +41,7 @@ void get_set(int **set, int *set_size);
 void print_set(const int *set, int set_size);
 
 /**
- * This function checks if a given number is present in a given integer set.
+ * This helper function checks if a given number is present in a given integer set.
  *
  * @param set A pointer to an integer set
  * @param set_size An integer representing the size of the set
@@ -60,52 +57,55 @@ int main() {
     int set_size = 0;
     printf("Enter a series of numbers (Ctrl+D to stop):\n");
     get_set(&set, &set_size); /* Get the set from the user */
-    printf("The set is: ");
-    print_set(set, set_size); /* Print the set */
+    if (set_size == 0) { /* Check if the set is empty */
+        printf("The set is empty.\n");
+    } else {
+        printf("The set is: ");
+        print_set(set, set_size); /* Print the set */
+    }
+
     free(set); /* Free the memory allocated for the set */
     return 0;
 }
 
 /**
- * This function prompts the user to enter integers and adds them to a set.
- * The set is stored as a dynamic array.
+ * This function reads integers from standard input and stores them as a set of integers in a dynamic array.
+ * The set will not contain any duplicates.
  *
- * @param set: a pointer to the set of integers
+ * @param set_ptr: a pointer to a pointer to the set of integers
  * @param set_size: a pointer to the number of elements in the set
- */
-void get_set(int **set, int *set_size) {
-    int *set_ptr = NULL; /* Pointer to the dynamically allocated set */
-    int size = 0;        /* The number of elements currently in the set */
-    int capacity = 0;    /* The maximum number of elements the set can hold */
-    int num;            /* Current number being read from input */
-    int sign = 1; /* Sign of the current number */
-    int c; /* First and Current characters being read from input */
+ */ 
+void get_set(int **set_ptr, int *set_size) {
+    /* Initialize the set and set size */
+    int num, max_size;
+    *set_ptr = NULL;  /* Initialize set pointer to NULL */
+    *set_size = 0;  /* Initialize set size to 0 */
 
-    while ((c = getchar()) != EOF) {  /* loop until end of file is reached */
-        if (c == '-') {  /* check if the character is a minus sign */
-            sign = -1;  /* if it is, set the sign to negative */
-        } else if (c >= '0' && c <= '9') {  /* check if the character is a digit */
-            num = num * 10 + c - '0';  /* if it is, add the digit to the number */
-        } else if (c == ' ' || c == '\t' || c == '\n') {  /* check if the character is whitespace */
-            num *= sign;  /* if it is, multiply the number by the sign to get the final value */
-            sign = 1;  /* reset the sign to positive */
-            if (size == capacity) { /* If the set is full, allocate more memory for it */
-                capacity = ENLARGE_SIZE(capacity, 10);
-                set_ptr = realloc(set_ptr, capacity * sizeof(int)); /* Reallocate memory for the set */
-                if (set_ptr == NULL) { /* If there was an error, exit the program */
-                    printf("Error: out of memory.\n");
-                    exit(1);
+    /* Allocate initial memory for the set */
+    *set_ptr = malloc(sizeof(int) * INITIAL_SIZE);
+    if (*set_ptr == NULL) { /* Check whether allocation was successful */
+        fprintf(stderr, "Error: Unable to allocate memory\n");
+        exit(EXIT_FAILURE);
+    }
+    max_size = INITIAL_SIZE; /* Initialize maximum size of set */
+
+    /* Read integers from standard input and add them to the set */
+    while (scanf("%d", &num) == 1) { /* Loop through input until end of file */
+        /* Only add the number to the set if it is not already in the set */
+        if (!in_set(*set_ptr, *set_size, num)) {
+            /* Reallocate memory for the set if necessary */
+            if (*set_size == max_size) {
+                max_size *= INITIAL_SIZE; /* Multiply the maximum size of set by INITIAL SIZE*/
+                *set_ptr = realloc(*set_ptr, sizeof(int) * max_size); /* Reallocate memory for set */
+                if (*set_ptr == NULL) { /* Check whether allocation was successful */
+                    fprintf(stderr, "Error: Unable to allocate memory\n");
+                    exit(EXIT_FAILURE);
                 }
             }
-            /* If the set is empty or the current number is not already in the set, add it to the set */
-            if (*set_size == 0 || !in_set(*set, *set_size, num)) {
-                set_ptr[size] = num;
-                size++;
-                *set_size = *set_size + 1;
-            }
+            (*set_ptr)[*set_size] = num;
+            (*set_size)++;
         }
     }
-    *set = set_ptr; /* Set the pointer to the set to the newly allocated memory */
 }
 
 /**
