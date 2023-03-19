@@ -27,8 +27,10 @@
  *
  * @param set_ptr: a pointer to a pointer to the set of integers
  * @param set_size: a pointer to the number of elements in the set
+ * @param orig_set_ptr: a pointer to a pointer to the set of integers - to print the original input
+ * @param set_size: a pointer to the number of elements in the set - to print the original input
  */ 
-void get_set(int **set_ptr, int *set_size);
+void get_set(int **set_ptr, int *set_size,int **orig_set_ptr, int *orig_set_size);
 
 /**
  * This function prints out a given integer set, ensuring that each number is printed only once.
@@ -41,7 +43,7 @@ void get_set(int **set_ptr, int *set_size);
 void print_set(const int *set, int set_size);
 
 /**
- * This helper function checks if a given number is present in a given integer set.
+ * This function checks if a given number is present in a given integer set.
  *
  * @param set A pointer to an integer set
  * @param set_size An integer representing the size of the set
@@ -55,16 +57,21 @@ int in_set(const int *set, int set_size, int num);
 int main() {
     int *set = NULL;
     int set_size = 0;
+    int *orig_set = NULL;
+    int orig_set_size = 0;
     printf("Enter a series of numbers (Ctrl+D to stop):\n");
-    get_set(&set, &set_size); /* Get the set from the user */
+    get_set(&set, &set_size, &orig_set, &orig_set_size); /* Get the set from the user */
+    
     if (set_size == 0) { /* Check if the set is empty */
         printf("The set is empty.\n");
     } else {
-        printf("The set is: ");
+        printf("The required set is: ");
         print_set(set, set_size); /* Print the set */
     }
 
-    free(set); /* Free the memory allocated for the set */
+    if (set != NULL) {
+        free(set); /* Free the memory allocated for the set if its not free*/
+    }
     return 0;
 }
 
@@ -74,12 +81,17 @@ int main() {
  *
  * @param set_ptr: a pointer to a pointer to the set of integers
  * @param set_size: a pointer to the number of elements in the set
+ * @param orig_set_ptr: a pointer to a pointer to the set of integers - to print the original input
+ * @param orig_set_size: a pointer to the number of elements in the set - to print the original input
  */ 
-void get_set(int **set_ptr, int *set_size) {
+void get_set(int **set_ptr, int *set_size,int **orig_set_ptr, int *orig_set_size){
     /* Initialize the set and set size */
-    int num, max_size;
+    int num;
+    int max_size = INITIAL_SIZE; /* Initialize maximum size of set */
     *set_ptr = NULL;  /* Initialize set pointer to NULL */
+    *orig_set_ptr = NULL;  /* Initialize set pointer to NULL */
     *set_size = 0;  /* Initialize set size to 0 */
+    *orig_set_size = 0;  /* Initialize orig set size to 0 */
 
     /* Allocate initial memory for the set */
     *set_ptr = malloc(sizeof(int) * INITIAL_SIZE);
@@ -87,25 +99,45 @@ void get_set(int **set_ptr, int *set_size) {
         fprintf(stderr, "Error: Unable to allocate memory\n");
         exit(EXIT_FAILURE);
     }
-    max_size = INITIAL_SIZE; /* Initialize maximum size of set */
+
+    /* Initialize a set to keep track of which numbers have already been seen */
+    *orig_set_ptr = malloc(sizeof(int) * INITIAL_SIZE);
+    if (*orig_set_ptr == NULL) { /* Check whether allocation was successful */
+        fprintf(stderr, "Error: Unable to allocate memory\n");
+        exit(EXIT_FAILURE);
+    }
 
     /* Read integers from standard input and add them to the set */
     while (scanf("%d", &num) == 1) { /* Loop through input until end of file */
+        /* Reallocate memory for the orig set if necessary */
+        if (*orig_set_size >= max_size) {
+            max_size = ENLARGE_SIZE(max_size, *orig_set_size); /* Increase the maximum size of set USING the MACRO*/
+            *orig_set_ptr = realloc(*orig_set_ptr, sizeof(int) * max_size);
+            if (*orig_set_ptr == NULL) {
+                fprintf(stderr, "Error: Unable to allocate memory\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+        (*orig_set_ptr)[(*orig_set_size)++] = num;
+        
         /* Only add the number to the set if it is not already in the set */
         if (!in_set(*set_ptr, *set_size, num)) {
-            /* Reallocate memory for the set if necessary */
-            if (*set_size == max_size) {
-                max_size *= INITIAL_SIZE; /* Multiply the maximum size of set by INITIAL SIZE*/
+            /* Reallocate memory for the new set if necessary */
+            if (*set_size >= max_size) {
+                max_size = ENLARGE_SIZE(max_size, *set_size); /* Increase the maximum size of set USING the MACRO*/
                 *set_ptr = realloc(*set_ptr, sizeof(int) * max_size); /* Reallocate memory for set */
                 if (*set_ptr == NULL) { /* Check whether allocation was successful */
                     fprintf(stderr, "Error: Unable to allocate memory\n");
                     exit(EXIT_FAILURE);
                 }
             }
-            (*set_ptr)[*set_size] = num;
-            (*set_size)++;
+            (*set_ptr)[(*set_size)++] = num;
         }
     }
+    /* Print the original input */
+    printf("This is the original input: ");
+    print_set(*orig_set_ptr,*orig_set_size);
+    /* free(orig_set_ptr); */
 }
 
 /**
@@ -116,18 +148,9 @@ void get_set(int **set_ptr, int *set_size) {
  * @param set_size: the number of elements in the set
  */
 void print_set(const int *set, int set_size) {
-    int i, j;
+    int i;
     for (i = 0; i < set_size; i++) {
-        int seen = 0;
-        for (j = 0; j < i; j++) {
-            if (set[i] == set[j]) {
-                seen = 1;
-                break;
-            }
-        }
-        if (!seen) { /* If the element has not already been seen, print it */
-            printf("%d ", set[i]);
-        }
+        printf("%d ", set[i]);
     }
     printf("\n");
 }
