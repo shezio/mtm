@@ -18,7 +18,7 @@
  * @param c: the amount to increase the size of the array by
  * @return the new size of the array
  */
-#define INITIAL_SIZE 2
+#define INITIAL_SIZE sizeof(int)
 #define ENLARGE_SIZE(s, n) (((n) > (s)) ? (n) : ((s) * INITIAL_SIZE))
 
 /**
