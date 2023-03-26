@@ -62,16 +62,6 @@ int main() {
     printf("Enter a series of numbers (Ctrl+D to stop):\n");
     get_set(&set, &set_size, &orig_set, &orig_set_size); /* Get the set from the user */
     
-    if (set_size == 0) { /* Check if the set is empty */
-        printf("The set is empty.\n");
-    } else {
-        printf("The required set is: ");
-        print_set(set, set_size); /* Print the set */
-    }
-
-    if (set != NULL) {
-        free(set); /* Free the memory allocated for the set if its not free*/
-    }
     return 0;
 }
 
@@ -93,15 +83,19 @@ void get_set(int **set_ptr, int *set_size,int **orig_set_ptr, int *orig_set_size
     *set_size = 0;  /* Initialize set size to 0 */
     *orig_set_size = 0;  /* Initialize orig set size to 0 */
 
+    printf("going to malloc set %d %p\n",(int)(sizeof(int) * INITIAL_SIZE),set_ptr);
     /* Allocate initial memory for the set */
     *set_ptr = malloc(sizeof(int) * INITIAL_SIZE);
+    printf("malloced set %d %p\n",(int)(sizeof(int) * INITIAL_SIZE),set_ptr);
     if (*set_ptr == NULL) { /* Check whether allocation was successful */
         fprintf(stderr, "Error: Unable to allocate memory\n");
         exit(EXIT_FAILURE);
     }
 
+    printf("going to malloc orig_set %d %p\n",(int)(sizeof(int) * INITIAL_SIZE),orig_set_ptr);
     /* Initialize a set to keep track of which numbers have already been seen */
     *orig_set_ptr = malloc(sizeof(int) * INITIAL_SIZE);
+    printf("malloced orig_set %d %p\n",(int)(sizeof(int) * INITIAL_SIZE),orig_set_ptr);
     if (*orig_set_ptr == NULL) { /* Check whether allocation was successful */
         fprintf(stderr, "Error: Unable to allocate memory\n");
         exit(EXIT_FAILURE);
@@ -112,12 +106,14 @@ void get_set(int **set_ptr, int *set_size,int **orig_set_ptr, int *orig_set_size
         /* Reallocate memory for the orig set if necessary */
         if (*orig_set_size >= max_size) {
             max_size = ENLARGE_SIZE(max_size, *orig_set_size); /* Increase the maximum size of set USING the MACRO*/
+            printf("going to realloc orig_set %d %p\n",(int)(sizeof(int) * INITIAL_SIZE),orig_set_ptr);
             *orig_set_ptr = realloc(*orig_set_ptr, sizeof(int) * max_size);
             if (*orig_set_ptr == NULL) {
                 fprintf(stderr, "Error: Unable to allocate memory\n");
                 exit(EXIT_FAILURE);
             }
         }
+        printf("this is *orig_set_size %p\n",*orig_set_size);
         (*orig_set_ptr)[(*orig_set_size)++] = num;
         
         /* Only add the number to the set if it is not already in the set */
@@ -125,19 +121,35 @@ void get_set(int **set_ptr, int *set_size,int **orig_set_ptr, int *orig_set_size
             /* Reallocate memory for the new set if necessary */
             if (*set_size >= max_size) {
                 max_size = ENLARGE_SIZE(max_size, *set_size); /* Increase the maximum size of set USING the MACRO*/
+                printf("going to realloc set %d %p\n",(int)(sizeof(int) * INITIAL_SIZE),set_ptr);
                 *set_ptr = realloc(*set_ptr, sizeof(int) * max_size); /* Reallocate memory for set */
                 if (*set_ptr == NULL) { /* Check whether allocation was successful */
                     fprintf(stderr, "Error: Unable to allocate memory\n");
                     exit(EXIT_FAILURE);
                 }
             }
+            printf("this is *set_size %p\n",*set_size);
             (*set_ptr)[(*set_size)++] = num;
         }
     }
+
     /* Print the original input */
     printf("This is the original input: ");
     print_set(*orig_set_ptr,*orig_set_size);
-    /* free(orig_set_ptr); */
+
+
+    if (*set_size == 0) { /* Check if the set is empty */
+        printf("The set is empty.\n");
+    } else {
+        printf("The required set is: ");
+        print_set(*set_ptr, *set_size); /* Print the set */
+    }
+
+    
+    printf("going to free set %d %p\n",(int)(sizeof(int) * INITIAL_SIZE),*set_ptr);
+    free(*set_ptr); /* Free the memory allocated for the set if its not free*/
+    printf("going to free set %d %p\n",(int)(sizeof(int) * INITIAL_SIZE),*orig_set_ptr);
+    free(*orig_set_ptr);
 }
 
 /**
