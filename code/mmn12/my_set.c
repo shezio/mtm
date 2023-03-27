@@ -3,12 +3,12 @@
  * ---------------
  * This program reads integers from the user and creates a set from them.
  * A set is a series of unique numbers. The program then prints out the
- * set in the order the numbers were input.
+ * original input from the user and the created set 
+ * Both in the order the numbers were input.
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 /* Initial size for reallocations */
 #define INITIAL_SIZE sizeof(int)
