@@ -17,14 +17,14 @@
 #include "data.h"
 
 int main(int argc, char *argv[]) {
-    /* Initialize variables */
-    unsigned int n, i, j;
-    struct node *head = NULL;    /* Pointer to the beginning of the list */
-    struct node *curr = NULL;    /* Pointer to the current node of the list */
-    struct node *current = NULL; /* Pointer to the temporary node of the list */
-    unsigned long long int *arr; /* Pointer to an array of Fibonacci series numbers */
-    unsigned long long int temp; /* Temporary variable used for sorting */
-    char input[256];             /* Input string for reading user input */
+    unsigned int n, i, j;          /* Initialize index variables and Fibo series length variable*/
+    struct node *head = NULL;      /* Pointer to the beginning of the list */
+    struct node *curr = NULL;      /* Pointer to the current node of the list */
+    struct node *current = NULL;   /* Pointer to the temporary node of the list */
+    unsigned long int *arr = NULL; /* Pointer to an array of Fibonacci series numbers */
+    unsigned long int temp;        /* Temporary variable used for sorting */
+    char input[256];               /* Input string for reading user input */
+    FILE *fp;                      /* File pointer to write to output file */
     
     /* Check if file name was given */
     if (argc != 2) {
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     /* Attempt to open the file */
-    FILE *fp = fopen(argv[1], "w");
+    fp = fopen(argv[1], "w");
     if (fp == NULL) {
         printf("File couldn't be opened.\n");
         return 1;
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
 
     printf("List in descending order: ");
     curr = head;
-    *arr = (unsigned long long int *)malloc(n * sizeof(unsigned long long int));
+    arr = (unsigned long int *)malloc(n * sizeof(unsigned long int));
     if (arr == NULL) {
         printf("Memory allocation failed.\n");
         return 1;
@@ -99,8 +99,8 @@ int main(int argc, char *argv[]) {
 
      /* Print the sorted Fibonacci series to the console and write it to a file */
     for (i = 0; i < n; i++) {
-        printf("%llu ", arr[i]);
-        fprintf(fp, "%llu ", arr[i]);
+        printf("%lu ", arr[i]);
+        fprintf(fp, "%lu ", arr[i]);
     }
     printf("\n");
     fprintf(fp, "\n\nFibonacci series of length %u in descending order.\n", n);
@@ -109,8 +109,8 @@ int main(int argc, char *argv[]) {
     and print each node's data to console and write to file */
     current = head;
     do {
-        printf("%llu ", current->data);
-        fprintf(fp, "%llu ", current->data);
+        printf("%lu ", current->data);
+        fprintf(fp, "%lu ", current->data);
         current = current->next;
     } while (current != head);
 

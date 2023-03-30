@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "data.h"
 
@@ -7,6 +8,8 @@
  * @param head A pointer to the head node of the linked list.
  */
 void printList(struct node *head) {
+    struct node *curr = NULL;      /* Pointer to the current node of the list */
+    
     /* If the linked list is empty, print a message and return */
     if (head == NULL) {
         printf("List is empty.\n");
@@ -14,9 +17,9 @@ void printList(struct node *head) {
     }
 
     /* Traverse the linked list and print the data in each node */
-    struct node *curr = head;
+    curr = head;
     do {
-        printf("%llu ", curr->data);
+        printf("%lu ", curr->data);
         curr = curr->next;
     } while (curr != head);
     printf("\n");
@@ -29,7 +32,8 @@ void printList(struct node *head) {
  * @param head A pointer to a pointer to the head node of the linked list.
  * @param val  The value to be added to the linked list.
  */
-void addNode(struct node **head, unsigned long long int val) {
+void addNode(struct node **head, unsigned long int val) {
+    struct node *curr = NULL;
     /* Allocate memory for the new node */
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
     newNode->data = val;
@@ -41,7 +45,7 @@ void addNode(struct node **head, unsigned long long int val) {
         newNode->next = newNode;
     } else {
         /* Traverse the linked list to find the last node */
-        struct node *curr = *head;
+        curr = *head;
         while (curr->next != *head) {
             curr = curr->next;
         }
@@ -56,14 +60,16 @@ void addNode(struct node **head, unsigned long long int val) {
  * @param head - pointer to the head node of the linked list.
  */
 void freeList(struct node **head) {
+    struct node *curr = NULL;      /* Pointer to the current node of the list */
+    struct node *temp;
+    
     /* Check if the list is empty */
     if (*head == NULL) {
         return;
     }
 
     /* Traverse the list and free each node */
-    struct node *curr = *head;
-    struct node *temp;
+    curr = *head;
     do {
         temp = curr->next; /* Save the next node */
         free(curr); /* Free the current node */
