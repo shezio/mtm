@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         printf("Invalid input format. Please enter a positive integer.\n");
         return 1;
     }
-    if (n < 1) {
+    if (n < 0) {
         printf("Input must be positive.\n");
         return 1;
     }
@@ -64,7 +64,8 @@ int main(int argc, char *argv[]) {
 
     fprintf(fp, "\nProgram Purpose: Create a circular linked list");
     fprintf(fp, "\nrepresenting the Fibonacci series of a given length n,");
-    fprintf(fp, "\nsort the list in descending order, and print it to the console and write it to a file.\n");
+    fprintf(fp, "\nsort the list in descending order, and print it to the ");
+    fprintf(fp, "\nconsole and write it to a file.\n");
     fprintf(fp, "The value of n given is: %u\n", n);
 
     /* Generate Fibonacci series using a circular linked list */
@@ -72,48 +73,55 @@ int main(int argc, char *argv[]) {
     addNode(&head, 1);
 
     /* Sort the Fibonacci series in descending order using an array */
-    for (i = 2; i <= n; i++) {
+    for (i = 2; i < n; i++) {
         addNode(&head, head->data + head->next->data);
     }
 
-    printf("List in descending order: ");
-    curr = head;
-    arr = (unsigned long int *)malloc(n * sizeof(unsigned long int));
-    if (arr == NULL) {
-        printf("Memory allocation failed.\n");
-        return 1;
-    }
-    for (i = 0; i < n; i++) {
-        arr[i] = curr->data;
-        curr = curr->next;
-    }
-    for (i = 0; i < n; i++) {
-        for (j = i + 1; j < n; j++) {
-            if (arr[j] > arr[i]) {
-                temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+    if (n > 0) {
+        addNode(&head, 0); /* add a node with data 0 to the end */
+        printf("List in descending order: ");
+        curr = head;
+        arr = (unsigned long int *)malloc(n * sizeof(unsigned long int));
+        if (arr == NULL) {
+            printf("Memory allocation failed.\n");
+            return 1;
+        }
+        for (i = 0; i < n; i++) {
+            arr[i] = curr->data;
+            curr = curr->next;
+        }
+        for (i = 0; i < n; i++) {
+            for (j = i + 1; j < n; j++) {
+                if (arr[j] > arr[i]) {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
             }
         }
     }
-
+    else
+        printf("List in descending order: 0\n");
      /* Print the sorted Fibonacci series to the console and write it to a file */
     for (i = 0; i < n; i++) {
         printf("%lu ", arr[i]);
-        fprintf(fp, "%lu ", arr[i]);
     }
     printf("\n");
-    fprintf(fp, "\n\nFibonacci series of length %u in descending order.\n", n);
-    
-    /* Traverse the circular linked list starting from head node
-    and print each node's data to console and write to file */
-    current = head;
-    do {
-        printf("%lu ", current->data);
-        fprintf(fp, "%lu ", current->data);
-        current = current->next;
-    } while (current != head);
+    if (n > 0) {
+        fprintf(fp, "\n\nFibonacci series of length %u in descending order:\n", n);
+        
+        /* Traverse the circular linked list starting from head node
+        and print each node's data to console and write to file */
+        current = head;
+        do {
+            fprintf(fp, "%lu ", current->data);
+            current = current->next;
+        } while (current != head);
+    }
+    else
+        fprintf(fp, "\nFibonacci series of length 0 in descending order:\n0\n");
 
+    fprintf(fp, "\n");
     /* Free dynamically allocated memory for the array and the linked list */
     free(arr);
     freeList(&head);
