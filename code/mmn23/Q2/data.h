@@ -7,6 +7,7 @@
 struct node {
     unsigned long int data;
     struct node *next;
+    struct node *prev;
 };
 
 void printList(struct node *head);

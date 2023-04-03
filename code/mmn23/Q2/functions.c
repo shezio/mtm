@@ -33,7 +33,7 @@ void printList(struct node *head) {
  * @param val  The value to be added to the linked list.
  */
 void addNode(struct node **head, unsigned long int val) {
-    struct node *curr = NULL;
+    struct node *last = NULL;
     /* Allocate memory for the new node */
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
     newNode->data = val;
@@ -45,14 +45,19 @@ void addNode(struct node **head, unsigned long int val) {
         newNode->next = newNode;
     } else {
         /* Traverse the linked list to find the last node */
-        curr = *head;
-        while (curr->next != *head) {
-            curr = curr->next;
+        last = *head;
+        while (last->next != *head) {
+            last = last->next;
         }
         /* Add the new node to the end of the linked list */
-        curr->next = newNode;
+        last->next = newNode;
         *head = newNode;
     }
+
+    printf("Address of head: %p\n", (void *)head);
+    printf("Address of newNode->next: %p\n", (void *)&newNode->next);
+    printf("Address of *head: %p\n", (void *)*head);
+    printf("Address of newNode: %p\n", (void *)newNode);
 }
 /**
  * Frees all nodes in the linked list and sets head to NULL.

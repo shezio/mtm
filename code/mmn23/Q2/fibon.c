@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
     struct node *head = NULL;      /* Pointer to the beginning of the list */
     struct node *curr = NULL;      /* Pointer to the current node of the list */
     struct node *current = NULL;   /* Pointer to the temporary node of the list */
+    struct node *highest = NULL;   /* Highest node in fibonacci list to ensure no data loss whilst writing to file*/
     unsigned long int *arr = NULL; /* Pointer to an array of Fibonacci series numbers */
     unsigned long int temp;        /* Temporary variable used for sorting */
     char input[256];               /* Input string for reading user input */
@@ -109,15 +110,26 @@ int main(int argc, char *argv[]) {
     printf("\n");
     if (n > 0) {
         fprintf(fp, "\n\nFibonacci series of length %u in descending order:\n", n);
-        
-        /* Traverse the circular linked list starting from head node
-        and print each node's data to console and write to file */
+
+        /* Find the highest value node in the circular linked list */
         current = head;
+        highest = head;
         do {
-            fprintf(fp, "%lu ", current->data);
+            if (current->data > highest->data) {
+                highest = current;
+            }
             current = current->next;
         } while (current != head);
+
+        /* Traverse the circular linked list in descending order starting from highest node 
+        and print each node's data to console and write to file */
+        current = highest;
+        do {
+            fprintf(fp, "%lu ", current->data);
+            current = current->prev;
+        } while (current != highest);
     }
+
     else
         fprintf(fp, "\nFibonacci series of length 0 in descending order:\n0\n");
 
