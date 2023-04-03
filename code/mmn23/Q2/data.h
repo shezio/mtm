@@ -10,6 +10,6 @@ struct node {
     struct node *prev;
 };
 
-void printList(struct node *head);
+void printList(struct node *head, int n, FILE* fp);
 void addNode(struct node **head, unsigned long int val);
 void freeList(struct node **head);
