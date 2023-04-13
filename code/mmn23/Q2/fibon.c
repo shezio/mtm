@@ -58,11 +58,11 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    fprintf(fp, "\nProgram Purpose: Create a circular linked list");
-    fprintf(fp, "\nrepresenting the Fibonacci series of a given length n,");
-    fprintf(fp, "\nsort the list in descending order, and print it to the ");
-    fprintf(fp, "\nconsole and write it to a file.\n");
-    fprintf(fp, "The value of n given is: %u\n", n);
+    fprintf(fp, "\nProgram Purpose: Create a circular linked list \
+                 \nrepresenting the Fibonacci series of a given length n,\
+                 \nsort the list in descending order, and print it to the \
+                 \nconsole and write it to a file.\
+                 \nThe value of n given is: %u\n", n);
 
    /* Generate Fibonacci series using a circular linked list */
     addNode(&head, 0);
