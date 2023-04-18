@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     }
     
     /* Get user input interactively*/
-    printf("Please enter a positive integer: ");
+    printf("Please enter a positive integer as the length of the Fibonnacci series to calculate\n(Be advised, any number above 10000 would take more time to calculate): ");
     fgets(input, 256, stdin);
 
     /* Input validations */
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
                  \nThe value of n given is: %u\n", n);
 
    /* Generate Fibonacci series using a circular linked list */
-    addNode(&head, 0);
+    addNode(&head, 1);
     addNode(&head, 1);
 
     /* Sort the Fibonacci series in descending order using an array */
@@ -74,22 +74,21 @@ int main(int argc, char *argv[]) {
     }
 
     if (n > 0) {
-        addNode(&head, 0); /* add a node with data 0 to the end */
         printf("List in descending order: ");
-        printList(head, n, NULL); /* Print to console */
+        printLinkedList(head, NULL); /* Print to console */
     }
     else
-        printf("List in descending order: 0\n");
+        printf("List in descending order: 1\n");
     
     printf("\n");
     if (n > 0) {
         fprintf(fp, "\n\nFibonacci series of length %u in descending order:\n", n);
-        printList(head, n, fp); /* Write to file */
+        printLinkedList(head, fp);  /* Write to file */
         printf("\n");
         fprintf(fp, "\n");
     }
     else
-        fprintf(fp, "\nFibonacci series of length 0 in descending order:\n0\n");
+        fprintf(fp, "\nFibonacci series of length 0 in descending order:\n1\n");
 
     /* Free dynamically allocated memory for the array and the linked list */
     fclose(fp);

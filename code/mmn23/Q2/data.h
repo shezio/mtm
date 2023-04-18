@@ -5,11 +5,11 @@
  * @next: a pointer to the next node in the circular linked list.
  */
 struct node {
-    unsigned long int data;
+    long long int data;
     struct node *next;
     struct node *prev;
 };
 
-void printList(struct node *head, int n, FILE* fp);
-void addNode(struct node **head, unsigned long int val);
+void printLinkedList(struct node *head, FILE* fp);
+void addNode(struct node **head, long long int val);
 void freeList(struct node **head);
