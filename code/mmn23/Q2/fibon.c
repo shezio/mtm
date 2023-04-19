@@ -4,8 +4,6 @@
  *
  * The program accepts a file name as a command line argument, and interactively gets an unsigned integer n from the user.
  * It checks for error conditions such as invalid argument amount, file couldn't be opened, memory allocation failed, and negative input.
- *
- * The program frees the memory used by the linked list and closes the file before exiting.
  */
 
 #include <stdio.h>
@@ -48,6 +46,10 @@ int main(int argc, char *argv[]) {
         printf("Input too long.\n");
         return 1;
     }
+    if (n > MAX_SERIES_LENGTH) {
+        printf("Cannot calc this big of fibonacci series due to lack of HW resources.\nPlease select a length smaller then %d.\n",MAX_SERIES_LENGTH);
+        return 1;
+    }
     for (i = 0; input[i] != '\n'; i++) {
         if (input[i] < '0' || input[i] > '9') {
             printf("Invalid input format. Please enter a positive integer.\n");
@@ -64,23 +66,17 @@ int main(int argc, char *argv[]) {
     /* Generate Fibonacci series using a circular linked list */
     fibonacci_calc(&head, n);
 
-    if (n > 0) {
-        printf("List in descending order: ");
-        printLinkedList(head, NULL); /* Print to console */
-    }
-    else
-        printf("List in descending order: 1\n");
-    
-    printf("\n");
-    if (n > 0) {
-        fprintf(fp, "\n\nFibonacci series of length %u in descending order:\n", n);
-        printLinkedList(head, fp);  /* Write to file */
-        printf("\n");
-        fprintf(fp, "\n");
-    }
-    else
-        fprintf(fp, "\nFibonacci series of length 0 in descending order:\n1\n");
+    /* Print the fibo series to console */
+    printf("List in descending order: ");
+    printLinkedList(head, NULL);
 
+    /* Write the fibo series to file */
+    fprintf(fp, "\n\nFibonacci series of length %u in descending order:\n", n);
+    printLinkedList(head, fp);  /* Write to file */
+    printf("\n");
+    fprintf(fp, "\n");
+
+    /* Close the file */
     fclose(fp);
 
     return 0;

@@ -15,5 +15,6 @@ def fibonacci(n):
 
 # calling the function and printing the last value in the sequence
 fib_seq = fibonacci(int(sys.argv[1]))
-print(' '.join(map(str,list(reversed(fib_seq)))))  # output: 3
+#print(' '.join(map(str,list(reversed(fib_seq)))))  # output: 3
+print(fib_seq[-1])
 #print(fib_seq)  # output: 34

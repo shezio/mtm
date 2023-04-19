@@ -1,0 +1,10 @@
+
+Program Purpose: Create a circular linked list                  
+representing the Fibonacci series of a given length n,                 
+sort the list in descending order, and print it to the                  
+console and write it to a file.                 
+The value of n given is: 0
+
+
+Fibonacci series of length 0 in descending order:
+1 
