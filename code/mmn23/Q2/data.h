@@ -1,15 +1,12 @@
-/**
- * struct node - Represents a node in the circular linked list.
- *
- * @data: the unsigned long int value stored in the node.
- * @next: a pointer to the next node in the circular linked list.
- */
-struct node {
-    long long int data;
+typedef struct node {
+    char *fibostr;  /* define a pointer to a string variable to store the Fibonacci number */
     struct node *next;
     struct node *prev;
-};
+} Node;
 
-void printLinkedList(struct node *head, FILE* fp);
-void addNode(struct node **head, long long int val);
-void freeList(struct node **head);
+int compareStrings(const void* a, const void* b);
+void radix_sort(Node **head);
+void printLinkedList(Node *head, FILE* fp);
+void fibonacci_calc(Node **head, int n);
+void insert_node(Node **head, char* data);
+Node *create_node(char* data);

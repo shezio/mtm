@@ -1,12 +1,9 @@
 /*
  * C program to create a circular linked list representing the Fibonacci series of a given length n,
- * sort the list in descending order, and print it to the console and write it to a file.
+ * prints it to the console and writes it to a file.
  *
  * The program accepts a file name as a command line argument, and interactively gets an unsigned integer n from the user.
  * It checks for error conditions such as invalid argument amount, file couldn't be opened, memory allocation failed, and negative input.
- *
- * The program creates a circular linked list to store the Fibonacci series, sorts the list in descending order,
- * and prints it to the console and writes it to the given file with a headline that describes the program purpose and the number n.
  *
  * The program frees the memory used by the linked list and closes the file before exiting.
  */
@@ -17,10 +14,10 @@
 #include "data.h"
 
 int main(int argc, char *argv[]) {
-    unsigned int n, i;          /* Initialize index variables and Fibo series length variable*/
-    struct node *head = NULL;      /* Pointer to the beginning of the list */
-    char input[256];               /* Input string for reading user input */
-    FILE *fp;                      /* File pointer to write to output file */
+    Node *head = NULL;  /* Pointer to the beginning of the list */
+    unsigned int n, i;  /* Initialize index variables and Fibo series length variable*/
+    char input[256];    /* Input string for reading user input */
+    FILE *fp;           /* File pointer to write to output file */
     
     /* Check if file name was given */
     if (argc != 2) {
@@ -35,7 +32,7 @@ int main(int argc, char *argv[]) {
     }
     
     /* Get user input interactively*/
-    printf("Please enter a positive integer as the length of the Fibonnacci series to calculate\n(Be advised, any number above 10000 would take more time to calculate): ");
+    printf("Please enter a positive integer as the length of the Fibonnacci series to calculate: ");
     fgets(input, 256, stdin);
 
     /* Input validations */
@@ -64,14 +61,8 @@ int main(int argc, char *argv[]) {
                  \nconsole and write it to a file.\
                  \nThe value of n given is: %u\n", n);
 
-   /* Generate Fibonacci series using a circular linked list */
-    addNode(&head, 1);
-    addNode(&head, 1);
-
-    /* Sort the Fibonacci series in descending order using an array */
-    for (i = 2; i < n; i++) {
-        addNode(&head, head->data + head->next->data);
-    }
+    /* Generate Fibonacci series using a circular linked list */
+    fibonacci_calc(&head, n);
 
     if (n > 0) {
         printf("List in descending order: ");
@@ -90,9 +81,7 @@ int main(int argc, char *argv[]) {
     else
         fprintf(fp, "\nFibonacci series of length 0 in descending order:\n1\n");
 
-    /* Free dynamically allocated memory for the array and the linked list */
     fclose(fp);
-    freeList(&head);
 
     return 0;
 }
