@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/sbunzel/Downloads/mtm",
-      "program": "c:/Users/sbunzel/Downloads/mtm/build/Debug/outDebug",
+      "cwd": "c:/Users/sbunzel/Downloads/mtm/code/mmn22/22",
+      "program": "c:/Users/sbunzel/Downloads/mtm/code/mmn22/22/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

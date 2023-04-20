@@ -1,15 +1,23 @@
-/* Contains assignment-wide definitions (such as booleans) and prototypes for main-used function */
-
-#include "complex.h" /* for complex */
-#define USER_VAR_COUNT 6 /* count of user accessible variables */
+#include "complex.h"
+#define VARIABLE_COUNT 6
 
 
-/* Basic boolean values (t/f) */
+#define MAX_LINE_LENGTH 200
+#define MAX_param_COUNT 3
+
+typedef enum command_type {
+    ERROR, STOP, NONE , READ_COMP, PRINT_COMP, ADD_COMP, SUB_COMP,
+    MULT_COMP_REAL, MULT_COMP_IMG, MULT_COMP_COMP, ABS_COMP
+} command_type;
+
+command_type get_command(char [], char *[3], int *);
+
+command_type check_command_string(char[]);
+
 typedef enum booleans { FALSE = 0, TRUE } boolean;
 
+boolean check_param_number(int expected_param_count, int actual_param_count);
 
-/* Compares required to actual, if equal return TRUE, otherwise FALSE. prints an error message to the user if FALSE. */
-boolean check_arg_num(int required, int actual);
+complex *get_variable_by_name(char *name);
 
-/* Returns the pointer to the user variable (A-F) by it's name. If no such, returns NULL and prints an error */
-complex *get_var_by_name(char *name);
+complex *complexes[VARIABLE_COUNT];
