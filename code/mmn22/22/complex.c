@@ -1,105 +1,189 @@
-/*
- * Contains operations for complex manipulation using the structure complex defined at complex.h
- * such as, reading, printing, and creating default complex.
- * prototypes are at complex.h.
- */
-#include <stdlib.h> /* For malloc & free */
-#include <math.h> /* For abs */
-#include <stdio.h> /* For printf */
+#include <stdlib.h>
+#include <math.h>
+#include <stdio.h>
 #include "complex.h"
 
-/* Creates a "clean" instance of a complex (represented by 0+0i) and returns a pointer to it */
+/**
+ * Allocates memory for a new complex number and initializes its real
+ * and imaginary parts to 0.
+ *
+ * @return a pointer to the newly allocated complex number
+ */
 complex *empty_comp()
 {
+    /* Allocate memory for the new complex number */
     complex *new = (complex *)malloc(sizeof(complex));
+    
+    /* Check if memory allocation failed */
     if (!new)
     {
         printf("Memory allocation failed!");
         exit(1);
     }
-    /* Default value: 0.0 for both fields */
+    
+    /* Initialize the real and imaginary parts of the complex number to 0 */
     new->imaginary = new->real = 0.0;
+    
+    /* Return a pointer to the new complex number */
     return new;
 }
 
-/* Assigns the second paramument as the real part of the complex paramument, and the third as it's imaginary part. */
+
+/**
+ * Initializes the given complex number with the provided real and
+ * imaginary parts.
+ *
+ * @param c a pointer to the complex number to be initialized
+ * @param real the real part of the complex number
+ * @param img the imaginary part of the complex number
+ */
 void read_comp(complex *c, double real, double img)
 {
-    /* Assignment */
+    /* set the real part of the given complex number to the input real value */
     c->real = real;
+    
+    /* set the imaginary part of the given complex number to the input imaginary value */
     c->imaginary = img;
 }
 
-/* Prints a complex number, formatted as real+(img)i. e.g: 5.00-(3.25)i, 2.84+(7.99)i */
+/**
+ * Prints the given complex number to the console in the format:
+ *    real + (|img|)i   (if img >= 0)
+ * or real - (|img|)i   (if img < 0)
+ *
+ * @param toprint a pointer to the complex number to be printed
+ */
 void print_comp(complex *toprint)
 {
-    /* Two-digit precision after dot for both numeric values */
-    /* Print real, then evaluate the sign of imaginary part, at the end the (image coefficient)i */
+    /* Print the real part rounded to two decimal places */
     printf("%.2f", toprint->real);
+    
+    /* Print '+' if imaginary part is non-negative, else '-' */
     printf((toprint->imaginary >= 0 ? "+" : "-"));
+    
+    /* Print the absolute value of the imaginary part rounded to two decimal places */
     printf("(%.2f)i\n", fabs(toprint->imaginary));
 }
 
-/* Prints the sum of both complex paramuments. */
+/**
+ * Adds two complex numbers and prints the result to the console.
+ *
+ * @param c1 a pointer to the first complex number
+ * @param c2 a pointer to the second complex number
+ */
 void add_comp(complex *c1, complex *c2)
 {
-    complex *to_print = empty_comp(); /* Temp */
-    /* (a+bi)+(c+di)=(a+c)+(b+d)i */
-    to_print->imaginary = (c1->imaginary)+(c2->imaginary);
-    to_print->real = (c1->real)+(c2->real);
+    /* allocate memory for the resulting complex number */
+    complex *to_print = empty_comp();
+
+    /* add the imaginary parts */
+    to_print->imaginary = (c1->imaginary) + (c2->imaginary);
+
+    /* add the real parts */
+    to_print->real = (c1->real) + (c2->real);
+
+    /* print the resulting complex number */
     print_comp(to_print);
-    free(to_print); /* Free the allocated memory */
+
+    /* free the memory allocated for the resulting complex number */
+    free(to_print);
 }
 
-/* Prints the subtraction result of the second paramument from the first. */
+/**
+ * Subtracts two complex numbers and prints the result to the console.
+ *
+ * @param c1 a pointer to the first complex number
+ * @param c2 a pointer to the second complex number
+ */
 void sub_comp(complex *c1, complex *c2)
 {
-    complex *to_print = empty_comp(); /* Temp */
-    /* (a+bi)-(c+di)=(a-c)+(b-d)i */
-    to_print->imaginary = (c1->imaginary)-(c2->imaginary);
-    to_print->real = (c1->real)-(c2->real);
+    /* create a new empty complex number */
+    complex *to_print = empty_comp();
+
+    /* subtract imaginary parts */
+    to_print->imaginary = (c1->imaginary) - (c2->imaginary);
+
+    /* subtract real parts */
+    to_print->real = (c1->real) - (c2->real);
+
+    /* print the result */
     print_comp(to_print);
-    free(to_print); /* Free the allocated memory */
+
+    /* free the memory used by the new complex number */
+    free(to_print);
 }
 
-/* Prints the multiplication result of the complex paramument and the doule number. */
+/**
+ * Multiplies a complex number by a real number and prints the result
+ * to the console.
+ *
+ * @param c a pointer to the complex number
+ * @param real the real number to multiply the complex number by
+ */
 void mult_comp_real(complex *c, double real)
 {
-    complex *to_print = empty_comp(); /* Temp */
-    /* s(a+bi)=sa+sbi */
-    to_print->imaginary = (c->imaginary)*real;
-    to_print->real = (c->real)*real;
+    /* Creates a new complex number to print */
+    complex *to_print = empty_comp();
+
+    /* Calculates the real and imaginary components of the product */
+    to_print->imaginary = (c->imaginary) * real;
+    to_print->real = (c->real) * real;
+
+    /* Prints the result */
     print_comp(to_print);
-    free(to_print); /* Free the allocated memory */
+
+    /* Frees the memory allocated for the new complex number */
+    free(to_print);
 }
 
-/* Prints the multiplication result of the complex paramument by the double paramument*(i) */
+/**
+ * Multiplies a complex number by an imaginary number and prints the
+ * result to the console.
+ *
+ * @param c a pointer to the complex number
+ * @param img the imaginary number to multiply the complex number by
+ */
 void mult_comp_img(complex *c, double img)
 {
-    complex *to_print = empty_comp(); /* Temp */
-    /* si(a+bi)=sai+sbi*i=-sb+sai */
+    /* Create a new complex number to hold the result */
+    complex *to_print = empty_comp();
+
+    /* Compute the multiplication and store the result in the new complex number */
     to_print->imaginary = img * (c->real);
     to_print->real = (-1) * img * (c->imaginary);
+
+    /* Print the result and free the memory allocated for the new complex number */
     print_comp(to_print);
-    free(to_print); /* Free the allocated memory */
+    free(to_print);
 }
 
-/* Prints the multiplication result of both complexes, passed as paramuments to the function. */
+/**
+ * Multiplies two complex numbers c1 and c2 and prints the result.
+ *
+ * @param c1 A pointer to the first complex number.
+ * @param c2 A pointer to the second complex number.
+ */
 void mult_comp_comp(complex *c1, complex *c2)
 {
-    complex *to_print = empty_comp(); /* Temp */
+    /* Create an empty complex number for the result */
+    complex *to_print = empty_comp();
 
-    /*(a+bi)(c+di)=ac+bci+adi+bdi*i=(ac-bd)+(ad+bc)i*/
+    /* Calculate the real and imaginary components of the product */
     to_print->imaginary = (c1->real * c2->imaginary) + (c1->imaginary * c2->real);
     to_print->real = (c1->real * c2->real) - (c1->imaginary * c2->imaginary);
 
+    /* Print the result and free the memory used by to_print */
     print_comp(to_print);
-    free(to_print); /* Free the allocated memory */
+    free(to_print);
 }
 
-/* Prints the absolute value of the first complex, given as paramument. */
+/**
+
+Calculates the absolute value (magnitude) of a given complex number.
+@param c A pointer to the complex number to calculate the absolute value of.
+@return The absolute value (magnitude) of the complex number.
+*/
 double abs_comp(complex *c)
 {
-	/* formula: sqrt(real^2+img^2) */
-    return sqrt(pow(c->real, 2)+pow(c->imaginary, 2));
+    return sqrt(pow(c->real, 2) + pow(c->imaginary, 2));
 }
