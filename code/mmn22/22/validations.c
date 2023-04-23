@@ -10,9 +10,9 @@
  * @param param_count A pointer to an integer that will hold the number of parameters found in the command string.
  * @return The type of command entered by the user, or ERROR if the command was not recognized.
  */
-command_type get_command(char line[], char *params_out[3], int *param_count)
+command_name get_command(char line[], char *params_out[MAX_PARAM_COUNT], int *param_count)
 {
-	command_type to_return;
+	command_name to_return;
 	char *command, *rest;
 	char line_copy[MAX_LINE_LENGTH];
 	int total_line_length = strlen(line);
@@ -95,12 +95,12 @@ command_type get_command(char line[], char *params_out[3], int *param_count)
 }
 
 /**
- * Determines the type of a command based on its name.
+ * Determines the name of a command.
  *
  * @param command The name of the command.
- * @return The type of the command, or NONE if the command was not recognized.
+ * @return The name of the command, or NONE if the command was not recognized.
  */
-command_type check_command_string(char command[])
+command_name check_command_string(char command[])
 {
 	if (strcmp(command, "read_comp") == 0)
 		return READ_COMP; /* command to read a complex number */
@@ -133,8 +133,8 @@ command_type check_command_string(char command[])
  * @param name The name of the variable.
  * @return A pointer to the complex variable, or NULL if no variable with that name exists.
  */
-complex *get_variable_by_name(char *name)
-{
+complex *get_variable_by_name(complex* complexes[],char *name)
+{	
 	/* Check if the name is a single capital letter from A to A + VARIABLE_COUNT. */
 	if (strlen(name) == 1 && name[0] >= 'A' && name[0] <= ('A' + VARIABLE_COUNT))
 	{
@@ -156,10 +156,13 @@ complex *get_variable_by_name(char *name)
 boolean check_param_number(int expected_param_count, int actual_param_count)
 {
 	if (expected_param_count == actual_param_count)
-		return TRUE;
+	{
+
+		return TRUE;}
+
 	else if (expected_param_count < actual_param_count)
 		puts("Extraneous text after end of command.");
 	else
-		puts("Missing parameter");
+		puts("Missing Argument");
 	return FALSE;
 }

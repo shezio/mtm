@@ -1,5 +1,6 @@
 #include "complex.h"
 
+/* The amount of variables to hold complex numbers */
 #define VARIABLE_COUNT 6
 
 /* The maximum length of an input line */
@@ -11,10 +12,10 @@
 /**
  * @brief An enumeration representing the possible types of commands that can be entered by the user.
  */
-typedef enum command_type {
+typedef enum command_name {
     ERROR, STOP, NONE, READ_COMP, PRINT_COMP, ADD_COMP, SUB_COMP,
     MULT_COMP_REAL, MULT_COMP_IMG, MULT_COMP_COMP, ABS_COMP
-} command_type;
+} command_name;
 
 /**
  * @brief An enumeration representing boolean values.
@@ -30,7 +31,7 @@ typedef enum booleans { FALSE = 0, TRUE } boolean;
  * @param param_count A pointer to an integer that will hold the number of parameters found in the command string.
  * @return The type of command entered by the user, or ERROR if the command was not recognized.
  */
-command_type get_command(char line[], char *params_out[3], int *param_count);
+command_name get_command(char line[], char *params_out[MAX_PARAM_COUNT], int *param_count);
 
 /**
  * @brief Determines the type of a command based on its name.
@@ -38,7 +39,7 @@ command_type get_command(char line[], char *params_out[3], int *param_count);
  * @param command The name of the command.
  * @return The type of the command, or NONE if the command was not recognized.
  */
-command_type check_command_string(char command[]);
+command_name check_command_string(char command[]);
 
 /**
  * @brief Checks whether the number of parameters provided for a command is correct.
@@ -53,9 +54,7 @@ boolean check_param_number(int expected_param_count, int actual_param_count);
  * @brief Returns a pointer to the complex variable (A-F) with the given name.
  *
  * @param name The name of the variable.
+ * @param complexes The array of complex variables
  * @return A pointer to the complex variable, or NULL if no variable with that name exists.
  */
-complex *get_variable_by_name(char *name);
-
-/* An array to hold the complex variables */
-complex *complexes[VARIABLE_COUNT];
+complex *get_variable_by_name(complex* complexes[], char *name);

@@ -9,7 +9,7 @@
  *
  * @return a pointer to the newly allocated complex number
  */
-complex *empty_comp()
+complex* empty_comp()
 {
     /* Allocate memory for the new complex number */
     complex *new = (complex *)malloc(sizeof(complex));
@@ -23,7 +23,7 @@ complex *empty_comp()
     
     /* Initialize the real and imaginary parts of the complex number to 0 */
     new->imaginary = new->real = 0.0;
-    
+
     /* Return a pointer to the new complex number */
     return new;
 }
@@ -55,6 +55,7 @@ void read_comp(complex *c, double real, double img)
  */
 void print_comp(complex *toprint)
 {
+    
     /* Print the real part rounded to two decimal places */
     printf("%.2f", toprint->real);
     

@@ -19,9 +19,12 @@
 int main()
 {
 	/* Initialize variables and array of complex number structures */
-	char line[MAX_LINE_LENGTH], *params[3];
+	char line[MAX_LINE_LENGTH], *params[MAX_PARAM_COUNT];
 	int param_count, i;
-	command_type command;
+	command_name command;
+
+	/* An array to hold the complex variables */
+	complex *complexes[VARIABLE_COUNT];
 
 	for (i = 0; i < VARIABLE_COUNT; i++)
 		complexes[i] = empty_comp();
@@ -33,15 +36,16 @@ int main()
 	while (fgets(line, MAX_LINE_LENGTH, stdin) != NULL)
 	{
 		printf("%s", line);
+
 		command = get_command(line, params, &param_count);
 
 		switch (command)
 		{
 		/* Read a complex number */
 		case READ_COMP:
-			if (check_param_number(3, param_count))
+			if (check_param_number(MAX_PARAM_COUNT, param_count))
 			{
-				complex *var = get_variable_by_name(params[0]);
+				complex *var = get_variable_by_name(complexes,params[0]);
 				if (var)
 				{
 					char *err0 = NULL, *err1 = NULL;
@@ -62,7 +66,7 @@ int main()
 		case ABS_COMP:
 			if (check_param_number(1, param_count))
 			{
-				complex *var = get_variable_by_name(params[0]);
+				complex *var = get_variable_by_name(complexes,params[0]);
 				if (var){
 					if (command == PRINT_COMP)
 						print_comp(var);
@@ -76,8 +80,8 @@ int main()
 		case MULT_COMP_COMP: /* Multiply 2 complex numbers */
 			if (check_param_number(2, param_count))
 			{
-				complex *var1 = get_variable_by_name(params[0]);
-				complex *var2 = get_variable_by_name(params[1]);
+				complex *var1 = get_variable_by_name(complexes,params[0]);
+				complex *var2 = get_variable_by_name(complexes,params[1]);
 				if (var1 && var2)
 				{
 					switch (command)
@@ -102,7 +106,7 @@ int main()
 			if (check_param_number(2, param_count))
 			{													 
 				/* check if there are 2 parameters given */
-				complex *var1 = get_variable_by_name(params[0]);
+				complex *var1 = get_variable_by_name(complexes,params[0]);
 				if (var1)
 				{
 					char *err0 = NULL;

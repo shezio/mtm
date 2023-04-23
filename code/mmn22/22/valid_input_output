@@ -1,0 +1,101 @@
+Type a command and press enter to execute:
+>> print_comp A
+Undefined complex variable
+>>     print_comp                         B
+Undefined complex variable
+>>     	 print_comp         C
+Undefined complex variable
+>> read_comp A,1,2
+>> read_comp B,3.4,-5.6
+>> read_comp C, 	  	 7.8 	 	 ,	 9.10
+>> read_comp D ,9,      4
+>> read_comp E 		  ,	-9.12365761  ,  	 1.178172
+>> read_comp F ,-9999,0
+>> 
+Undefined command name
+>> 
+Undefined command name
+>> print_comp A
+Undefined complex variable
+>> print_comp B
+Undefined complex variable
+>> print_comp C
+Undefined complex variable
+>> print_comp D
+Undefined complex variable
+>> print_comp E
+Undefined complex variable
+>> print_comp F
+Undefined complex variable
+>> 
+Undefined command name
+>> add_comp A                   ,B
+Undefined complex variable
+>> add_comp           	B,A
+Undefined complex variable
+>> add_comp C,F
+Undefined complex variable
+>> add_comp D,E
+Undefined complex variable
+>> add_comp           F ,     D
+Undefined complex variable
+>> 
+Undefined command name
+>> sub_comp C, 	A
+Undefined complex variable
+>> sub_comp  D  ,  B
+Undefined complex variable
+>> sub_comp  	 F	  	,  D
+Undefined complex variable
+>> sub_comp B,E
+Undefined complex variable
+>> sub_comp F,A
+Undefined complex variable
+>> 
+Undefined command name
+>> mult_comp_real A,1
+1.00+(2.00)i
+>> mult_comp_real B , 8.54
+29.04-(47.82)i
+>> mult_comp_real C    ,0
+0.00+(0.00)i
+>> mult_comp_real D    , -9
+-81.00-(36.00)i
+>> mult_comp_real F    , -8.24
+82391.76+(0.00)i
+>> mult_comp_real E,   4376
+-39925.13+(5155.68)i
+>> 
+Undefined command name
+>> 
+Undefined command name
+>> mult_comp_img A,1
+-2.00+(1.00)i
+>> mult_comp_img B , 8.54
+47.82+(29.04)i
+>> mult_comp_img C    ,0
+-0.00+(0.00)i
+>> mult_comp_img D    , -9
+36.00-(81.00)i
+>> mult_comp_img F    , -8.24
+0.00+(82391.76)i
+>> mult_comp_img E,   4376
+-5155.68-(39925.13)i
+>> 
+Undefined command name
+>> mult_comp_comp   A,B
+Undefined complex variable
+>> mult_comp_comp         C,D
+Undefined complex variable
+>> mult_comp_comp      E,  F
+Undefined complex variable
+>> read_comp F  , 0 ,  0
+>> mult_comp_comp A , F
+Undefined complex variable
+>> mult_comp_comp F , F
+Undefined complex variable
+>> 
+Undefined command name
+>>         stop
+Undefined command name
+>> Please exit using the stop command.
