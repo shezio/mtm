@@ -30,7 +30,7 @@ int main()
 		complexes[i] = empty_comp();
 
 	/* Prompt user for input */
-	printf("Type a command and press enter to execute:\n>> ");
+	printf("Please insert a command. Press enter to execute:\n--> ");
 
 	/* Continuously loop through user input and execute commands until STOP command is input */
 	while (fgets(line, MAX_LINE_LENGTH, stdin) != NULL)
@@ -130,7 +130,7 @@ int main()
 		default: /* Error/None: Error was printed, get another line from user */
 			break;
 		}
-		printf(">> ");
+		printf("--> ");
 	}
 	puts("Please exit using the stop command.");
 	return 0;

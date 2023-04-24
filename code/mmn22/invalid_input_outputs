@@ -1,0 +1,84 @@
+Please insert a command. Press enter to execute:
+--> print_comp      A     ,
+Extraneous text after end of command
+--> print_comp 	 	,   B
+Illegal comma
+--> print_comp 	 	 , 	  C 	  ,
+Illegal comma
+--> print_comp d
+Undefined complex variable
+--> 
+--> read_comp A, 0,
+Extraneous text after end of command
+--> read_comp F 0 0
+Missing comma
+--> read_comp A , 0 , 0 ,
+Extraneous text after end of command
+--> read_comp B,,5,6
+Multiple consecutive commas
+--> read_comp C,8,9,
+Extraneous text after end of command
+--> read_comp DD,5,6
+Undefined complex variable
+--> read_comp E,2.0,1.88,A
+Extraneous text after end of command
+--> read_comp E,4.5,5.6 D
+Missing comma
+--> read_comp D,4.5,5.6B
+Invalid parameter - not a number
+--> read_comp A,2.5,3.6,C,E,F,A,B,C,D,E,F,A,B,C
+Extraneous text after end of command
+--> 
+--> add_comp C  ,    D    ,
+Extraneous text after end of command
+--> add_comp ,A      ,      F
+Illegal comma
+--> add_comp , C     E,
+Illegal comma
+--> add_comp  C      ,       ,    F
+Multiple consecutive commas
+--> add_comp   c  ,       F
+Undefined complex variable
+--> add_comp C F
+Missing comma
+--> add_comp    G  ,     A
+Undefined complex variable
+--> add_comp    F   ,     @
+Undefined complex variable
+--> 
+--> abs_comp a
+Undefined complex variable
+--> abs_comp AA
+Undefined complex variable
+--> abs_comp
+Undefined complex variable
+--> abs_comp 5
+Undefined complex variable
+--> abs_comp A,B
+Extraneous text after end of command.
+--> abs_comp A,b,c
+Extraneous text after end of command.
+--> 
+--> mult_comp_real B,3,
+Extraneous text after end of command
+--> mult_comp_real ,A,4,
+Illegal comma
+--> mult_comp_real ,A 5,
+Illegal comma
+--> mult_comp_real ,A 6
+Illegal comma
+--> mult_comp_real A 7
+Missing comma
+--> mult_comp_real A
+Missing Argument
+--> mult_comp_real A, 8 ,9
+Extraneous text after end of command.
+--> mult_comp_real A, 3 ,10,
+Extraneous text after end of command
+--> mult_comp_real A, 2 1
+Missing comma
+--> mult_comp_real A, 4 7,
+Missing comma
+--> 
+--> 
+--> Please exit using the stop command.

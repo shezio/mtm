@@ -135,15 +135,13 @@ command_name check_command_string(char command[])
  */
 complex *get_variable_by_name(complex* complexes[],char *name)
 {	
-	/* Check if the name is a single capital letter from A to A + VARIABLE_COUNT. */
-	if (strlen(name) == 1 && name[0] >= 'A' && name[0] <= ('A' + VARIABLE_COUNT))
-	{
-		/* Return the corresponding complex variable. */
-		return complexes[name[0] - 'A'];
-	}
-	/* If the name is invalid, print an error message and return NULL. */
-	puts("Undefined complex variable");
-	return NULL;
+    /* Check if the name is a single capital letter from A to A + VARIABLE_COUNT. */
+    if (strlen(name) == 1 && name[0] >= 'A' && name[0] <= ('A' + VARIABLE_COUNT - 1))
+            /* Return the corresponding complex variable. */
+            return complexes[name[0] - 'A'];
+    /* Print an error message if the name is invalid. */
+    puts("Undefined complex variable");
+    return NULL;
 }
 
 /**
